@@ -5,6 +5,7 @@ import Experience from "./sections/Experience/Experience";
 import Projects from "./sections/Project/Project";
 import FadeSection from "./components/FadeSection/FadeSection";
 import Home from "./sections/Home/Home";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         </FadeSection>
         <FadeSection id="projects">
           <Projects />
+          <Footer />
         </FadeSection>
       </main>
     </div>

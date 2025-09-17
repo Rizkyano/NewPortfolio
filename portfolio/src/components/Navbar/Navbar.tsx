@@ -1,42 +1,45 @@
-import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="flex items-center justify-between w-[90vw] max-w-5xl bg-[#121317]/95 border border-gray-700 rounded-2xl px-6 py-4 shadow-lg">
+    <nav className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-6xl transition-colors duration-500`}>
+      <div className={`flex items-center justify-between rounded-2xl px-8 py-4 shadow-lg border transition-all duration-500 ${scrolled ? "bg-[#121317]/95 border-gray-700" : "bg-transparent border-transparent"}`}>
         {/* Logo + Nama */}
-        <div className="flex items-center space-x-3">
-          <div className="text-gray-300 font-bold text-2xl leading-none">
-            {/* <span className="block">ade</span>
-            <span className="block">ola</span> */}
-          </div>
-          <span className="text-sm tracking-widest text-gray-300">Rizkyano</span>
-        </div>
+        <span className="text-lg md:text-xl font-bold tracking-wider text-gray-200">Rizkyano</span>
 
-        {/* Tombol Menu */}
-        <button onClick={() => setIsOpen(!isOpen)} className="flex items-center space-x-2 text-gray-300 hover:text-white transition">
-          <span className="uppercase text-sm font-semibold">Menu</span>
-          {isOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-
-      {/* Overlay Menu */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center space-y-10 text-2xl text-gray-200">
-          <a href="#about" onClick={() => setIsOpen(false)} className="hover:text-cyan-400 transition">
+        {/* Menu Tengah */}
+        <div className="flex items-center space-x-8 text-sm md:text-base text-gray-300 font-medium">
+          <a href="#about" className="hover:text-cyan-400 transition-colors">
             About
           </a>
-          <a href="#experience" onClick={() => setIsOpen(false)} className="hover:text-cyan-400 transition">
+          <a href="#experience" className="hover:text-cyan-400 transition-colors">
             Experience
           </a>
-          <a href="#projects" onClick={() => setIsOpen(false)} className="hover:text-cyan-400 transition">
-            Projects
+          <a href="#projects" className="hover:text-cyan-400 transition-colors">
+            Project
           </a>
         </div>
-      )}
+
+        {/* Contact */}
+        <a href="#contact" className="text-sm md:text-base font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+          Contact
+        </a>
+      </div>
     </nav>
   );
 }

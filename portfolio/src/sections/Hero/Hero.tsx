@@ -1,7 +1,7 @@
 // src/components/HeroBackground.tsx
 export default function HeroBackground() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-slate-300">
       {/* Gradient utama */}
       <div
         className="absolute inset-0 bg-gradient-to-br from-purple-600 via-cyan-500 to-blue-700 
